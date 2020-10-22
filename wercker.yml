@@ -49,15 +49,6 @@ deploy:
         registry: "https://registry.hub.docker.com"
         repository: rosspl2/game-frontend-micro
         tag: latest
-    - 
-      cng/cf-deploy: 
-        api: $API
-        appname: wercker-step-game-frontend-micro
-        docker_image: rosspl2/game-frontend-micro
-        org: $ORG
-        password: $PASSWORD
-        space: $SPACE
-        user: $USER
 dev: 
   steps: 
     - 

@@ -1,0 +1,85 @@
+--- 
+box: golang
+build: 
+  steps: 
+    - 
+      setup-go-workspace: 
+        package-dir: github.com/rossmcq/game-frontend-micro
+    - 
+      script: 
+        code: env
+        name: env
+    - 
+      script: 
+        code: |
+            
+            cd $WERCKER_SOURCE_DIR
+            
+            go version
+                        
+            export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+            
+            glide install
+        name: "go get"
+    - 
+      script: 
+        code: |
+            
+            go build
+        name: "go build"
+    - 
+      script: 
+        code: |
+            
+            go test 
+        name: "go test"
+    - 
+      script: 
+        code: |
+            
+            cp -R ./ ${WERCKER_OUTPUT_DIR}
+        name: "copy files to wercker output"
+deploy: 
+  steps: 
+    - 
+      internal/docker-push: 
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        cmd: /pipeline/source/game-frontend-micro
+        port: "1212"
+        registry: "https://registry.hub.docker.com"
+        repository: rosspl2/game-frontend-micro
+        tag: latest
+    - 
+      cng/cf-deploy: 
+        api: $API
+        appname: wercker-step-game-frontend-micro
+        docker_image: rosspl2/game-frontend-micro
+        org: $ORG
+        password: $PASSWORD
+        space: $SPACE
+        user: $USER
+dev: 
+  steps: 
+    - 
+      setup-go-workspace: 
+        package-dir: github.com/rossmcq/game-frontend-micro
+    - 
+      script: 
+        code: env
+        name: env
+    - 
+      script: 
+        code: |
+            
+            cd $WERCKER_SOURCE_DIR
+            
+            go version
+            
+            export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+            
+        name: "go get"
+    - 
+      internal/watch: 
+        code: "go run main.go"
+        reload: true

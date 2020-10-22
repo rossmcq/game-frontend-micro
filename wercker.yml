@@ -18,8 +18,7 @@ build:
             go version
                         
             export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
-            
-            glide install
+
         name: "go get"
     - 
       script: 

@@ -16,8 +16,14 @@ build:
             cd $WERCKER_SOURCE_DIR
             
             go version
-                        
+
+            go get github.com/olekukonko/tablewriter
+
+            echo $WERCKER_SOURCE_DIR
+            
             export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+
+            curl https://glide.sh/get | sh
 
         name: "go get"
     - 
@@ -30,7 +36,7 @@ build:
       script: 
         code: |
             
-            go test 
+            go test -v $(glide novendor)
         name: "go test"
     - 
       script: 
@@ -65,8 +71,14 @@ dev:
             cd $WERCKER_SOURCE_DIR
             
             go version
+
+            go get github.com/olekukonko/tablewriter
+
+            echo $WERCKER_SOURCE_DIR
             
             export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+
+            curl https://glide.sh/get | sh
             
         name: "go get"
     - 

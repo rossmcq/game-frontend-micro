@@ -1,33 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
-	"github.com/olekukonko/tablewriter"
+	service "github.com/rossmcq/gamefrontendmicro/service"
 )
 
 func main() {
-	fmt.Println("Hello Front End users")
 
-	data := [][]string{
+	port := os.Getenv("PORT")
 
-		[]string{"Alfred", "15", "10/20", "(10.32, 56.21, 30.25)"},
+	if len(port) == 0 {
 
-		[]string{"Beelzebub", "30", "30/50", "(1,1,1)"},
+		port = "3000"
 
-		[]string{"Hortense", "21", "80/80", "(1,1,1)"},
-
-		[]string{"Pokey", "8", "30/40", "(1,1,1)"},
 	}
 
-	table := tablewriter.NewWriter(os.Stdout)
+	server := service.NewServer()
 
-	table.SetHeader([]string{"NPC", "Speed", "Power", "Location"})
+	server.Run(":" + port)
 
-	table.AppendBulk(data)
-
-	table.Render()
-
-	fmt.Println("Hello Again Front End users")
 }

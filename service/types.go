@@ -1,0 +1,42 @@
+package service
+
+import "github.com/cloudnativego/gogo-engine"
+
+type newMatchResponse struct {
+	ID          string `json:"id"`
+	StartedAt   int64  `json:"started_at"`
+	GridSize    int    `json:"gridsize"`
+	PlayerWhite string `json:"playerWhite"`
+	PlayerBlack string `json:"playerBlack"`
+}
+
+type player struct {
+	Color string `json:"color"`
+	Name  string `json:"name"`
+}
+
+type matchRepository interface {
+	addMatch(match gogo.Match) (err error)
+	getMatches() []gogo.Match
+}
+
+type newMatchRequest struct {
+	GridSize    int    `json:"gridsize"`
+	PlayerWhite string `json:"playerWhite"`
+	PlayerBlack string `json:"playerBlack"`
+}
+
+func (request newMatchRequest) isValid() (valid bool) {
+	valid = true
+	if request.GridSize != 19 && request.GridSize != 13 && request.GridSize != 9 {
+		valid = false
+	}
+
+	if request.PlayerBlack == "" {
+		valid = false
+	}
+	if request.PlayerWhite == "" {
+		valid = false
+	}
+	return valid
+}

@@ -4,7 +4,7 @@ build:
   steps: 
     - 
       setup-go-workspace: 
-        package-dir: github.com/rossmcq/game-frontend-micro
+        package-dir: github.com/rossmcq/gamefrontendmicro
     - 
       script: 
         code: env
@@ -50,16 +50,16 @@ deploy:
       internal/docker-push: 
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        cmd: /pipeline/source/game-frontend-micro
+        cmd: /pipeline/source/gamefrontendmicro
         port: "1212"
         registry: "https://registry.hub.docker.com"
-        repository: rosspl2/game-frontend-micro
+        repository: rosspl2/gamefrontendmicro
         tag: latest
 dev: 
   steps: 
     - 
       setup-go-workspace: 
-        package-dir: github.com/rossmcq/game-frontend-micro
+        package-dir: github.com/rossmcq/gamefrontendmicro
     - 
       script: 
         code: env

@@ -19,6 +19,14 @@ build:
 
             go get github.com/olekukonko/tablewriter
 
+            go get github.com/cloudnativego/gogo-engine
+
+            go get github.com/unrolled/render
+
+            go get github.com/urfave/negroni
+
+            go get github.com/gorilla/mux
+
             echo $WERCKER_SOURCE_DIR
             
             export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
@@ -73,6 +81,14 @@ dev:
             go version
 
             go get github.com/olekukonko/tablewriter
+
+            go get github.com/cloudnativego/gogo-engine
+
+            go get github.com/unrolled/render
+
+            go get github.com/urfave/negroni
+
+            go get github.com/gorilla/mux
 
             echo $WERCKER_SOURCE_DIR
             
